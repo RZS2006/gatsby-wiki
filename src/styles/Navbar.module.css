@@ -1,0 +1,24 @@
+.nav {
+	background-color: #0d1126;
+	padding: 1rem 0;
+}
+
+.navContainer {
+	display: flex;
+}
+
+.appName {
+	font-weight: 600;
+	color: white;
+	margin-right: 1rem;
+}
+
+.linkContainer {
+	display: flex;
+}
+
+.link {
+	margin-right: 0.5rem;
+	color: #c8c8c8;
+	text-decoration: none;
+}

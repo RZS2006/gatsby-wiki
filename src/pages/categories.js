@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 const CategoriesPage = () => {
 	return (
 		<Layout>
-			<div>
+			<div className="container">
 				<h1>Categories</h1>
 				<p>Browse many categories</p>
 			</div>

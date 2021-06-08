@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 const HomePage = () => {
 	return (
 		<Layout>
-			<div>
+			<div className="container">
 				<h1>Homepage</h1>
 				<p>Welcome to Mersupedia</p>
 			</div>
