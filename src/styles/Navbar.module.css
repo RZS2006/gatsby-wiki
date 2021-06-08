@@ -22,3 +22,8 @@
 	color: #c8c8c8;
 	text-decoration: none;
 }
+
+.link:hover {
+	color: #e2e2e2;
+	transition: 200ms;
+}
