@@ -1,11 +1,14 @@
 import React from 'react';
+import Layout from '../components/Layout';
 
 const HomePage = () => {
 	return (
-		<div>
-			<h1>Homepage</h1>
-			<p>Welcome to Mersupedia</p>
-		</div>
+		<Layout>
+			<div>
+				<h1>Homepage</h1>
+				<p>Welcome to Mersupedia</p>
+			</div>
+		</Layout>
 	);
 };
 
