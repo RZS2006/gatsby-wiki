@@ -31,8 +31,17 @@ export default HomePage;
 
 export const query = graphql`
 	query {
-		allMarkdownRemark {
+		allMarkdownRemark(
+			sort: { fields: [frontmatter___createdAt], order: DESC }
+		) {
 			nodes {
+				frontmatter {
+					title
+					description
+					slug
+					category
+					published
+				}
 				html
 				id
 			}
