@@ -1,13 +1,25 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, graphql, useStaticQuery } from 'gatsby';
 import * as styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
+	const data = useStaticQuery(graphql`
+		query SiteTitle {
+			site {
+				siteMetadata {
+					title
+				}
+			}
+		}
+	`);
+
+	const { title } = data.site.siteMetadata;
+
 	return (
 		<nav className={styles.nav}>
 			<div className="container">
 				<div className={styles.navContainer}>
-					<span class={styles.appName}>Mersupedia</span>
+					<span class={styles.appName}>{title}</span>
 					<div className={styles.linkContainer}>
 						<Link to="/" className={styles.link}>
 							Home
