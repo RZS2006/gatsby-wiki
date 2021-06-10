@@ -35,6 +35,7 @@ export default CategoryPage;
 export const query = graphql`
 	query WikiArticlesByCategory($category: String!) {
 		allMarkdownRemark(
+			sort: { fields: [frontmatter___createdAt], order: DESC }
 			filter: { frontmatter: { categories: { in: [$category] } } }
 		) {
 			nodes {
