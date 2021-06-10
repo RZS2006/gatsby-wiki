@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import Layout from '../components/Layout';
 
@@ -8,7 +8,7 @@ const WikiArticlePage = ({ data }) => {
 	const {
 		title,
 		description,
-		category,
+		categories,
 		coverImage,
 		updatedAt,
 	} = article.frontmatter;
@@ -21,7 +21,12 @@ const WikiArticlePage = ({ data }) => {
 				)}
 				<h1>{title}</h1>
 				<p>{description}</p>
-				<p>Category: {category}</p>
+				<p>
+					Categories:{' '}
+					{categories.map(category => (
+						<Link to={`/categories/${category}`}>{category}</Link>
+					))}
+				</p>
 				<p>Last updated: {new Date(updatedAt).toLocaleDateString()}</p>
 				<div dangerouslySetInnerHTML={{ __html: article.html }}></div>
 			</div>
@@ -37,7 +42,7 @@ export const query = graphql`
 			frontmatter {
 				title
 				description
-				category
+				categories
 				coverImage {
 					childImageSharp {
 						gatsbyImageData(layout: FULL_WIDTH)
