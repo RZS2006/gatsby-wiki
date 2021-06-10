@@ -13,10 +13,13 @@ module.exports = {
 			},
 		},
 		{
-			resolve: 'gatsby-transformer-remark',
+			resolve: `gatsby-transformer-remark`,
 			options: {
 				plugins: [],
 			},
 		},
+		`gatsby-plugin-image`,
+		`gatsby-plugin-sharp`,
+		`gatsby-transformer-sharp`,
 	],
 };

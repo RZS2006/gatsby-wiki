@@ -19,7 +19,7 @@ const Navbar = () => {
 		<nav className={styles.nav}>
 			<div className="container">
 				<div className={styles.navContainer}>
-					<span class={styles.appName}>{title}</span>
+					<span className={styles.appName}>{title}</span>
 					<div className={styles.linkContainer}>
 						<Link to="/" className={styles.link}>
 							Home
