@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import Layout from '../components/Layout';
 
 const HomePage = ({ data }) => {
@@ -13,7 +13,10 @@ const HomePage = ({ data }) => {
 				<div>
 					{articles.map(article => (
 						<div key={article.id}>
-							<h2>Post - {article.id}</h2>
+							<Link to={`articles/${article.frontmatter.slug}`}>
+								<h2>{article.frontmatter.title}</h2>
+							</Link>
+							<p>{article.id}</p>
 							<p
 								dangerouslySetInnerHTML={{
 									__html: article.html,
