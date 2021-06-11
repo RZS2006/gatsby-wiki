@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import Layout from '../components/Layout';
+import CategoryTag from '../components/CategoryTag';
+import * as styles from '../styles/WikiArticlePage.module.css';
 
 const WikiArticlePage = ({ data }) => {
 	const article = data.markdownRemark;
@@ -17,18 +19,31 @@ const WikiArticlePage = ({ data }) => {
 		<Layout>
 			<div className="container">
 				{coverImage && (
-					<GatsbyImage image={getImage(coverImage)} alt={title} />
+					<GatsbyImage
+						image={getImage(coverImage)}
+						alt={title}
+						className={styles.image}
+					/>
 				)}
-				<h1>{title}</h1>
-				<p>{description}</p>
-				<p>
-					Categories:{' '}
-					{categories.map(category => (
-						<Link to={`/categories/${category}`}>{category}</Link>
-					))}
+				<h1 className={styles.title}>{title}</h1>
+				<p className={styles.description}>
+					{description.trim() || article.excerpt}
 				</p>
-				<p>Last updated: {new Date(updatedAt).toLocaleDateString()}</p>
-				<div dangerouslySetInnerHTML={{ __html: article.html }}></div>
+				<div>
+					{categories.map(category => (
+						<CategoryTag
+							key={category}
+							to={`/categories/${category}`}
+						>
+							{category}
+						</CategoryTag>
+					))}
+				</div>
+				<p className={styles.date}>Last updated: {updatedAt}</p>
+				<div
+					dangerouslySetInnerHTML={{ __html: article.html }}
+					className={styles.markdown}
+				></div>
 			</div>
 		</Layout>
 	);
@@ -45,12 +60,13 @@ export const query = graphql`
 				categories
 				coverImage {
 					childImageSharp {
-						gatsbyImageData(layout: FULL_WIDTH)
+						gatsbyImageData(layout: FULL_WIDTH, aspectRatio: 1.77)
 					}
 				}
-				updatedAt
+				updatedAt(formatString: "ddd, D MMMM YYYY")
 				published
 			}
+			excerpt
 			html
 			id
 		}

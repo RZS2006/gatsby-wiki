@@ -1,0 +1,9 @@
+.tag {
+	display: inline-block;
+	margin: 1rem 0.5rem 0 0;
+	padding: 0.5rem 1rem;
+	font-size: 0.8rem;
+	border-radius: 9999px;
+	background-color: var(--clr-white-bg-hover);
+	color: var(--clr-text-secondary);
+}

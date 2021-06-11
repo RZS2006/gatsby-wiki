@@ -10,6 +10,7 @@
 	--clr-primary: #0d1126;
 	--clr-text-secondary: #2b2d36;
 	--clr-white-bg-hover: #f4f4f4;
+	--clr-text-link: #283992;
 }
 
 body,
@@ -29,7 +30,7 @@ a {
 }
 
 h1 {
-	margin: 2rem 0 0.5rem;
+	margin: 1rem 0 0.5rem;
 }
 
 .container {
@@ -37,6 +38,10 @@ h1 {
 }
 
 @media screen and (min-width: 640px) {
+	h1 {
+		margin: 2rem 0 0.5rem;
+	}
+
 	.container {
 		padding: 0;
 		width: 80%;
