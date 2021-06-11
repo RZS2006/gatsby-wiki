@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
+import ArticleCard from '../components/ArticleCard';
 
 const HomePage = ({ data }) => {
 	const articles = data.allMarkdownRemark.nodes;
@@ -11,19 +12,15 @@ const HomePage = ({ data }) => {
 				<h1>Homepage</h1>
 				<p>Welcome to Mersupedia</p>
 				<div>
-					{articles.map(article => (
-						<div key={article.id}>
-							<Link to={`/articles/${article.frontmatter.slug}`}>
-								<h2>{article.frontmatter.title}</h2>
-							</Link>
-							<p>{article.id}</p>
-							<p
-								dangerouslySetInnerHTML={{
-									__html: article.html,
-								}}
-							></p>
-						</div>
-					))}
+					{articles.map(
+						article =>
+							article.frontmatter.published && (
+								<ArticleCard
+									key={article.id}
+									article={article}
+								/>
+							)
+					)}
 				</div>
 			</div>
 		</Layout>
@@ -42,10 +39,14 @@ export const query = graphql`
 					title
 					description
 					slug
-					categories
+					coverImage {
+						childImageSharp {
+							gatsbyImageData(width: 140, aspectRatio: 1)
+						}
+					}
 					published
 				}
-				html
+				excerpt
 				id
 			}
 		}

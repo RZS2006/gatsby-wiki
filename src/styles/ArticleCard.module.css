@@ -1,0 +1,48 @@
+.articleCard {
+	display: flex;
+	margin-top: 1rem;
+}
+
+.articleCard:hover {
+	background-color: var(--clr-white-bg-hover);
+	transition: 200ms;
+}
+
+.image {
+	display: none;
+	min-width: 140px;
+}
+
+.cardContent {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 1rem 1rem;
+}
+
+.title {
+	font-size: 1.4rem;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.description {
+	margin-top: 0.2rem;
+	color: var(--clr-text-secondary);
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+@media screen and (min-width: 640px) {
+	.image {
+		display: block;
+	}
+
+	.title {
+		font-size: 1.6rem;
+	}
+}

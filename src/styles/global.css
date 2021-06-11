@@ -6,6 +6,12 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--clr-primary: #0d1126;
+	--clr-text-secondary: #2b2d36;
+	--clr-white-bg-hover: #f4f4f4;
+}
+
 body,
 button,
 input {
@@ -14,15 +20,16 @@ input {
 
 body {
 	min-height: 100vh;
-	color: #0d1126;
+	color: var(--clr-primary);
 }
 
 a {
 	color: unset;
+	text-decoration: none;
 }
 
 h1 {
-	margin: 1rem 0;
+	margin: 2rem 0 0.5rem;
 }
 
 .container {
