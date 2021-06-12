@@ -13,6 +13,7 @@ exports.createPages = async ({ graphql, actions }) => {
 					frontmatter {
 						slug
 						categories
+						published
 					}
 					id
 				}
@@ -20,7 +21,9 @@ exports.createPages = async ({ graphql, actions }) => {
 		}
 	`);
 
-	const articles = result.data.allMarkdownRemark.nodes;
+	const articles = result.data.allMarkdownRemark.nodes.filter(
+		article => article.frontmatter.published
+	);
 
 	articles.forEach(article => {
 		createPage({

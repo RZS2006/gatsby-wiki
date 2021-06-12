@@ -6,7 +6,7 @@ categories: ['Test Articles', 'Another Tag']
 coverImage: './mercedes-c-class.jpg'
 createdAt: 2021-06-07
 updatedAt: 2021-06-09
-published: true
+published: false
 ---
 
 This is my first post on my new fake blog! How exciting!

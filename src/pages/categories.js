@@ -17,7 +17,7 @@ const CategoriesPage = ({ data }) => {
 				<div>
 					{sortedCategories.map(category => (
 						<CategoryTag
-							key={category}
+							key={category.fieldValue}
 							to={`/categories/${category.fieldValue}`}
 						>
 							{category.fieldValue} ({category.totalCount})
@@ -33,7 +33,9 @@ export default CategoriesPage;
 
 export const query = graphql`
 	query {
-		allMarkdownRemark {
+		allMarkdownRemark(
+			filter: { frontmatter: { published: { eq: true } } }
+		) {
 			group(field: frontmatter___categories) {
 				fieldValue
 				totalCount
