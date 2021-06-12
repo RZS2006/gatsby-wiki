@@ -96,9 +96,18 @@
 	list-style-position: inside;
 }
 
+.markdown img.gatsby-resp-image-image {
+	display: block;
+	margin-bottom: 2rem;
+}
+
 .markdown pre {
 	margin-bottom: 2rem;
 	overflow-x: auto;
+	line-height: 1.5;
+	background-color: var(--clr-white-bg-hover);
+	padding: 1rem 1.5rem;
+	border-radius: 0.3rem;
 }
 
 .markdown hr {
@@ -109,18 +118,29 @@
 
 .markdown table {
 	width: 100%;
+	font-size: 0.9rem;
 	margin-bottom: 2rem;
 	border-collapse: collapse;
 	border-spacing: 0.25rem;
+	border: 1px solid var(--clr-white-bg-hover);
 }
 
-.markdown table thead tr th {
-	border-bottom: 1px solid var(--clr-primary);
+.markdown table :is(th, td) {
+	padding: 0.5rem;
+}
+
+.markdown table th {
+	background-color: var(--clr-white-bg-hover);
 }
 
 .markdown a {
 	text-decoration: underline;
 	color: var(--clr-text-link);
+}
+
+.markdown a:hover {
+	color: var(--clr-text-link-hover);
+	transition: 200ms;
 }
 
 @media screen and (min-width: 640px) {
