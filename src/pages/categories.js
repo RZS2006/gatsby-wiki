@@ -1,9 +1,13 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
+import CategoryTag from '../components/CategoryTag';
 
 const CategoriesPage = ({ data }) => {
 	const categories = data.allMarkdownRemark.group;
+	const sortedCategories = categories
+		.sort((a, b) => a.totalCount - b.totalCount)
+		.reverse();
 
 	return (
 		<Layout>
@@ -11,10 +15,13 @@ const CategoriesPage = ({ data }) => {
 				<h1>Categories</h1>
 				<p>Browse many categories</p>
 				<div>
-					{categories.map(category => (
-						<Link to={`/categories/${category.fieldValue}`}>
+					{sortedCategories.map(category => (
+						<CategoryTag
+							key={category}
+							to={`/categories/${category.fieldValue}`}
+						>
 							{category.fieldValue} ({category.totalCount})
-						</Link>
+						</CategoryTag>
 					))}
 				</div>
 			</div>
