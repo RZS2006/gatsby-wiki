@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
+import Seo from '../components/Seo';
 import CategoryTag from '../components/CategoryTag';
 
 const CategoriesPage = ({ data }) => {
@@ -11,6 +12,7 @@ const CategoriesPage = ({ data }) => {
 
 	return (
 		<Layout>
+			<Seo title="Categories" />
 			<div className="container">
 				<h1>Categories</h1>
 				<p>Browse many categories</p>

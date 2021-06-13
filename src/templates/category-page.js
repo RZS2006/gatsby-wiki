@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
+import Seo from '../components/Seo';
 import ArticleCard from '../components/ArticleCard';
 
 const CategoryPage = ({ pageContext, data }) => {
@@ -9,6 +10,7 @@ const CategoryPage = ({ pageContext, data }) => {
 
 	return (
 		<Layout>
+			<Seo title={category} />
 			<div className="container">
 				<h1>{category}</h1>
 				<div>

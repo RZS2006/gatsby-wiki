@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
+import Seo from '../components/Seo';
 import ArticleCard from '../components/ArticleCard';
 
 const HomePage = ({ data }) => {
@@ -8,6 +9,7 @@ const HomePage = ({ data }) => {
 
 	return (
 		<Layout>
+			<Seo />
 			<div className="container">
 				<h1>Homepage</h1>
 				<p>Welcome to Mersupedia</p>

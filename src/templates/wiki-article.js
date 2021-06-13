@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import Layout from '../components/Layout';
+import Seo from '../components/Seo';
 import CategoryTag from '../components/CategoryTag';
 import * as styles from '../styles/WikiArticlePage.module.css';
 
@@ -17,6 +18,10 @@ const WikiArticlePage = ({ data }) => {
 
 	return (
 		<Layout>
+			<Seo
+				title={title}
+				description={description.trim() || article.excerpt}
+			/>
 			<div className="container">
 				{coverImage && (
 					<GatsbyImage
