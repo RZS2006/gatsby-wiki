@@ -1,0 +1,10 @@
+.link {
+	display: inline-block;
+	color: var(--clr-text-link);
+	margin-top: 0.5rem;
+}
+
+.link:hover {
+	color: var(--clr-text-link-hover);
+	transition: 200ms;
+}
