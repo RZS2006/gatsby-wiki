@@ -4,6 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 import CategoryTag from '../components/CategoryTag';
+import ArticleCard from '../components/ArticleCard';
 import * as styles from '../styles/WikiArticlePage.module.css';
 
 const WikiArticlePage = ({ data }) => {
@@ -15,6 +16,7 @@ const WikiArticlePage = ({ data }) => {
 		coverImage,
 		updatedAt,
 	} = article.frontmatter;
+	const relatedArticles = data.allMarkdownRemark.nodes;
 
 	return (
 		<Layout>
@@ -49,6 +51,21 @@ const WikiArticlePage = ({ data }) => {
 					dangerouslySetInnerHTML={{ __html: article.html }}
 					className={styles.markdown}
 				></div>
+
+				{relatedArticles.length > 0 && (
+					<div className={styles.relatedArticles}>
+						<h2>Related Articles</h2>
+						{relatedArticles.map(
+							article =>
+								article.frontmatter.published && (
+									<ArticleCard
+										key={article.id}
+										article={article}
+									/>
+								)
+						)}
+					</div>
+				)}
 			</div>
 		</Layout>
 	);
@@ -57,7 +74,27 @@ const WikiArticlePage = ({ data }) => {
 export default WikiArticlePage;
 
 export const query = graphql`
-	query WikiArticleById($id: String!) {
+	query WikiArticleById($id: String!, $relatedArticleIndexes: [String!]!) {
+		allMarkdownRemark(
+			sort: { fields: [frontmatter___createdAt], order: DESC }
+			filter: { id: { in: $relatedArticleIndexes } }
+		) {
+			nodes {
+				frontmatter {
+					title
+					description
+					slug
+					coverImage {
+						childImageSharp {
+							gatsbyImageData(width: 140, aspectRatio: 1)
+						}
+					}
+					published
+				}
+				excerpt
+				id
+			}
+		}
 		markdownRemark(id: { eq: $id }) {
 			frontmatter {
 				title

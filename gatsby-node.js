@@ -26,10 +26,18 @@ exports.createPages = async ({ graphql, actions }) => {
 	);
 
 	articles.forEach(article => {
+		const articleWithoutCurrent = articles.filter(a => a.id !== article.id);
+		const relatedArticleIndexes = articleWithoutCurrent.filter(a =>
+			a.frontmatter.categories.some(category =>
+				article.frontmatter.categories.includes(category)
+			)
+		);
+		const slicedArticles = relatedArticleIndexes.map(a => a.id).slice(0, 3);
+
 		createPage({
 			path: `/articles/${article.frontmatter.slug}`,
 			component: wikiArticleTemplate,
-			context: { id: article.id },
+			context: { id: article.id, relatedArticleIndexes: slicedArticles },
 		});
 	});
 

@@ -143,6 +143,11 @@
 	transition: 200ms;
 }
 
+.relatedArticles {
+	padding-bottom: 2rem;
+	margin-top: 4rem;
+}
+
 @media screen and (min-width: 640px) {
 	.image {
 		margin-top: 2rem;
