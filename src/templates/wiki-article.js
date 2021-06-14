@@ -7,7 +7,8 @@ import CategoryTag from '../components/CategoryTag';
 import ArticleCard from '../components/ArticleCard';
 import * as styles from '../styles/WikiArticlePage.module.css';
 
-const WikiArticlePage = ({ data }) => {
+const WikiArticlePage = ({ pageContext, data }) => {
+	const { relatedArticleIndexes } = pageContext;
 	const article = data.markdownRemark;
 	const {
 		title,
@@ -16,7 +17,16 @@ const WikiArticlePage = ({ data }) => {
 		coverImage,
 		updatedAt,
 	} = article.frontmatter;
+
+	console.log(relatedArticleIndexes);
+
 	const relatedArticles = data.allMarkdownRemark.nodes;
+	const sortedRelatedArticles = [];
+
+	relatedArticleIndexes.forEach(index => {
+		const article = relatedArticles.find(article => article.id === index);
+		sortedRelatedArticles.push(article);
+	});
 
 	return (
 		<Layout>
@@ -52,10 +62,10 @@ const WikiArticlePage = ({ data }) => {
 					className={styles.markdown}
 				></div>
 
-				{relatedArticles.length > 0 && (
+				{sortedRelatedArticles.length > 0 && (
 					<div className={styles.relatedArticles}>
 						<h2>Related Articles</h2>
-						{relatedArticles.map(
+						{sortedRelatedArticles.map(
 							article =>
 								article.frontmatter.published && (
 									<ArticleCard

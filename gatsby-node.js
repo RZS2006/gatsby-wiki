@@ -8,7 +8,9 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	const result = await graphql(`
 		query {
-			allMarkdownRemark {
+			allMarkdownRemark(
+				sort: { fields: [frontmatter___createdAt], order: DESC }
+			) {
 				nodes {
 					frontmatter {
 						slug
@@ -26,18 +28,46 @@ exports.createPages = async ({ graphql, actions }) => {
 	);
 
 	articles.forEach(article => {
-		const articleWithoutCurrent = articles.filter(a => a.id !== article.id);
-		const relatedArticleIndexes = articleWithoutCurrent.filter(a =>
-			a.frontmatter.categories.some(category =>
-				article.frontmatter.categories.includes(category)
-			)
+		// Return three related articles that have the most matching categories
+
+		const articlesFilteredCurrent = articles.filter(
+			a => a.id !== article.id
 		);
-		const slicedArticles = relatedArticleIndexes.map(a => a.id).slice(0, 3);
+		const articlesMapAmountOfMatches = articlesFilteredCurrent.map(a => {
+			let count = 0;
+
+			article.frontmatter.categories.forEach(category => {
+				if (a.frontmatter.categories.includes(category)) count++;
+			});
+
+			return count;
+		});
+
+		const articlesFilteredZeroMatches = articlesFilteredCurrent.filter(
+			(_, i) => articlesMapAmountOfMatches[i] > 0
+		);
+
+		const articlesSortedByMatches = articlesFilteredZeroMatches.sort(
+			(a, b) =>
+				articlesMapAmountOfMatches[
+					articlesFilteredZeroMatches.indexOf(b)
+				] -
+				articlesMapAmountOfMatches[
+					articlesFilteredZeroMatches.indexOf(a)
+				]
+		);
+
+		const articlesSlicedIndexes = articlesSortedByMatches
+			.map(a => a.id)
+			.slice(0, 3);
 
 		createPage({
 			path: `/articles/${article.frontmatter.slug}`,
 			component: wikiArticleTemplate,
-			context: { id: article.id, relatedArticleIndexes: slicedArticles },
+			context: {
+				id: article.id,
+				relatedArticleIndexes: articlesSlicedIndexes,
+			},
 		});
 	});
 

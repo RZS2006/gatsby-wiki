@@ -23,6 +23,7 @@ const ArticleCard = ({ article }) => {
 					</p>
 				</div>
 			</div>
+			<span>{article.id}</span>
 		</Link>
 	);
 };
