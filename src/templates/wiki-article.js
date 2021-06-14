@@ -18,8 +18,6 @@ const WikiArticlePage = ({ pageContext, data }) => {
 		updatedAt,
 	} = article.frontmatter;
 
-	console.log(relatedArticleIndexes);
-
 	const relatedArticles = data.allMarkdownRemark.nodes;
 	const sortedRelatedArticles = [];
 
